@@ -18,8 +18,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include('demopost.urls')),
     path('api/v1/base_auth/', include('rest_framework.urls')),  # подключение аутентифик.из коробки
-    path('api/v1/demopost/', include('demopost.urls')),
     path('api/v1/auth/', include('djoser.urls')),
     path('api/v1/auth_token/', include('djoser.urls.authtoken')),
 ]

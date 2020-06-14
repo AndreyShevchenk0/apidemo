@@ -2,10 +2,10 @@ from django.contrib import admin
 from django.urls import path, include
 from demopost.views import *
 
-app_name = 'suit'
+app_name = 'demopost'
 
 urlpatterns = [
-    path('create/', CarCreateView.as_view()),  # car убрал
-    path('all/', CarsListView.as_view()),
-    #path('car/detail/<int:pk>/', CarDetailView.as_view()),# испитания
+    path('create/', PostCreateView.as_view()),
+    path('all/', PostListView.as_view()),
+    path('detail/<int:pk>/', PostDetailView.as_view()),
 ]

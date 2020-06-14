@@ -1,38 +1,40 @@
+from django.utils import timezone
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 User = get_user_model()
 
 
-class Car(models.Model):
+class Post(models.Model):
     """ Модель Отправки """
     user = models.ForeignKey(User, related_name="posts", on_delete=models.CASCADE)
-
-    title = models.TextField(unique=True)
+    title = models.CharField(max_length=100, unique=True)
     added = models.DateTimeField(auto_now_add=True)
-    text = models.TextField()
-
+    text = models.CharField(max_length=250,)
     liked = models.IntegerField(default=0)
-    unliked = models.IntegerField(default=0)
+    anliked = models.IntegerField(default=0)
+
+    def __str__(self):
+        return '%s object (%s)' % (self.__class__.__name__, self.pk)
 
 
-# class tUser(AbstractBaseUser, PermissionsMixin):
-#     """
-#     An abstract base class implementing a fully featured User model with
-#     admin-compliant permissions.
-#
-#     """
-#     email = models.EmailField(max_length=40, unique=True)
-#     first_name = models.CharField(max_length=30, blank=True)
-#     last_name = models.CharField(max_length=30, blank=True)
+# class User(AbstractBaseUser, PermissionsMixin):
+#     email = models.EmailField(unique=True)
+#     username = models.CharField(max_length=25, unique=True)
+#     first_name = models.CharField(max_length=40)
+#     last_name = models.CharField(max_length=140)
+#     date_joined = models.DateTimeField(default=timezone.now)
 #     is_active = models.BooleanField(default=True)
 #     is_staff = models.BooleanField(default=False)
-#     date_joined = models.DateTimeField(default=timezone.now)
+#     # facility = models.CharField(max_length=140)
+#     # jobdescription = models.CharField(max_length=140)
+#     # positiondescription = models.CharField(max_length=140)
 #
-#     objects = UserManager()
+#     USERNAME_FIELD = "username"
 #
-#     USERNAME_FIELD = 'email'
-#     REQUIRED_FIELDS = ['first_name', 'last_name']
-#
-#     def save(self, *args, **kwargs):
-#         super(User, self).save(*args, **kwargs)
-#         return self
+#     def __str__(self):
+#         return self.is_active
+
+
+
+

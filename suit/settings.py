@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rest_framework.authtoken',
     'demopost',
+    'rest_framework.authtoken',
     'djoser',
 ]
 
@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'demopost.urls'
+ROOT_URLCONF = 'suit.urls'
 
 TEMPLATES = [
     {
@@ -113,7 +113,7 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDER_CLASSES': (
         'rest_framework.renderers.JSONRender',
         'rest_framework.renderers.BrowsablerAPIRenderer',# уберем браузерную версию коментом
-    )
+    ),
 }
 
 # Internationalization
