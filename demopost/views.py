@@ -8,21 +8,45 @@ from rest_framework.generics import RetrieveUpdateDestroyAPIView
 
 
 class PostCreateView(generics.CreateAPIView,):
-    """ создание """
+    """ Создание Записи """
     serializer_class = PostDetailSerializer
 
 
 class PostListView(generics.ListAPIView):
+    """ Просмотр всех записей  Пользователя """
     serializer_class = PostListSerializer
-    queryset = Post.objects.all()
+    queryset = Post.objects.all()#filter(update_post=timezone.now())  # фильт рdates('added_post', 'day')
     permission_classes = (IsAuthenticated,)
-
 
 class PostDetailView(generics. RetrieveUpdateDestroyAPIView):
     """ Просмотр конкретних записей, редактирование и удаление! """
     serializer_class = PostDetailSerializer
     queryset = Post.objects.all()
     permission_classes = (IsOwnerOrReadOnly,)
+
+
+
+    # class PostDetailView(generics.RetrieveUpdateDestroyAPIView):
+    #     """ Просмотр конкретних записей, редактирование и удаление! +
+    #     Просмотр всех записей за последние 15 дней Пользователя """
+    #     serializer_class = PostDetailSerializer
+    #     queryset = Post.objects.all().filter('id','-update_post')
+    #     #queryset = Post.objects.all(id=current_post).filter(author=user)
+                                        #.order_by('-update_post')#.all #(id=current_post)
+    #     permission_classes = (IsOwnerOrReadOnly,)
+
+
+
+    #pip install django-filter
+    #from django_filters.rest_framework import DjangoFilterBackend
+    # разкоментировать в сетингах
+    # class ProductList(generics.ListAPIView):
+    #     queryset = Product.objects.all()
+    #     serializer_class = ProductSerializer
+    #     filter_backends = [DjangoFilterBackend]
+    #     filterset_fields = ['id'= -15, + 'update_post' = -15 ]
+
+
     #name = 'coment_list'
     #permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly)
 
